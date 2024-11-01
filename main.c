@@ -17,7 +17,10 @@ void setup() {
 	MY_PORT_B_DDR |= (1 << 5); // Plus 32, 1 shiftet 5 gange = 32
 	MY_PORT_B_DDR |= (1 << 4); // Plus 16, 1 shiftet 4 gange = 16
 	MY_PORT_B_DDR |= (1 << 3); // Plus 8, 1 shiftet 3 gange = 8
-}
+	MY_PORT_B_DDR |= (1 << 2); // Plus 8, 1 shiftet 3 gange = 8
+	MY_PORT_B_DDR |= (1 << 1); // Plus 8, 1 shiftet 3 gange = 8
+	MY_PORT_B_DDR |= (1 << 0); // Plus 8, 1 shiftet 3 gange = 8
+} 
 
 void loop() {
 	//TODO: Skriv 32 til 0x25, tænder PB5
@@ -25,45 +28,72 @@ void loop() {
 	// volatile så den ikke bliver filtreret fra i -Os flag under compile 
 	volatile long pause = 0;
 
-	// Rødt lys
-	MY_PORT_B |= (1 << 5); // plus 32, 1 shiftet 5 gange = 32
-
-	for (pause = 0; pause < 100000; pause++) {
-		pause = pause;
-	}
-	
-	MY_PORT_B &= ~(1 << 5); // = 0, 1 shiftet 5 gange = 32 men NOT (~) 
-	
-	for (pause = 0; pause < 100000; pause++) {
-		pause = pause;
-	}
-
-
-	// Gult lys
-	MY_PORT_B |= (1 << 4); // plus 32, 1 shiftet 4 gange = 16
-
-	for (pause = 0; pause < 100000; pause++) {
-		pause = pause;
-	}
-	
-	MY_PORT_B &= ~(1 << 4); // = 0, 1 shiftet 4 gange = 16 men NOT (~) 
-	
-	for (pause = 0; pause < 100000; pause++) {
-		pause = pause;
-	}
-
-
-
-	// Grønt lys
+	// Rødt lys Tænd
 	MY_PORT_B |= (1 << 3); // plus 8, 1 shiftet 3 gange = 8
+	MY_PORT_B |= (1 << 0); // plus 8, 1 shiftet 3 gange = 8
+	for (pause = 0; pause < 1500000; pause++) {
+		pause = pause;
+	}
 
-	for (pause = 0; pause < 100000; pause++) {
+	// Gult lys Tænd
+	MY_PORT_B |= (1 << 4); // plus 32, 1 shiftet 4 gange = 16
+	for (pause = 0; pause < 500000; pause++) {
 		pause = pause;
 	}
 	
+	// Rødt lys sluk
 	MY_PORT_B &= ~(1 << 3); // = 0, 1 shiftet 3 gange = 8 men NOT (~) 
-	
-	for (pause = 0; pause < 100000; pause++) {
+	// Gult lys sluk
+	MY_PORT_B &= ~(1 << 4); // = 0, 1 shiftet 4 gange = 16 men NOT (~) 
+	// Grønt lys Tænd
+	MY_PORT_B |= (1 << 5); // plus 32, 1 shiftet 5 gange = 32
+	for (pause = 0; pause < 2000000; pause++) {
 		pause = pause;
 	}
+
+	// Grønt lys Sluk
+	MY_PORT_B &= ~(1 << 5); // = 0, 1 shiftet 5 gange = 32 men NOT (~) 
+	// Gult lys Tænd
+	MY_PORT_B |= (1 << 4); // plus 32, 1 shiftet 4 gange = 16
+	for (pause = 0; pause < 1000000; pause++) {
+		pause = pause;
+	}
+
+	// Gult lys sluk
+	MY_PORT_B &= ~(1 << 4); // = 0, 1 shiftet 4 gange = 16 men NOT (~)
+	// Rødt lys tænd
+	MY_PORT_B |= (1 << 3); // plus 8, 1 shiftet 3 gange = 8
+	for (pause = 0; pause < 1000000; pause++) {
+		pause = pause;
+	}
+
+
+	// ===============================================================
+
+	// Gult lys Tænd
+	MY_PORT_B |= (1 << 1); // plus 32, 1 shiftet 4 gange = 16
+	for (pause = 0; pause < 500000; pause++) {
+		pause = pause;
+	}
+
+	// Rødt lys sluk
+	MY_PORT_B &= ~(1 << 0); // = 0, 1 shiftet 3 gange = 8 men NOT (~) 
+	// Gult lys sluk
+	MY_PORT_B &= ~(1 << 1); // = 0, 1 shiftet 4 gange = 16 men NOT (~) 
+	// Grønt lys Tænd
+	MY_PORT_B |= (1 << 2); // plus 32, 1 shiftet 5 gange = 32
+	for (pause = 0; pause < 2000000; pause++) {
+		pause = pause;
+	}
+
+	// Grønt lys Sluk
+	MY_PORT_B &= ~(1 << 2); // = 0, 1 shiftet 5 gange = 32 men NOT (~) 
+	// Gult lys Tænd
+	MY_PORT_B |= (1 << 1); // plus 32, 1 shiftet 4 gange = 16
+	for (pause = 0; pause < 1000000; pause++) {
+		pause = pause;
+	}
+
+	// Gult lys sluk
+	MY_PORT_B &= ~(1 << 1); // = 0, 1 shiftet 4 gange = 16 men NOT (~)
 }
